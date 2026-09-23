@@ -110,17 +110,16 @@
     "check:api-surface": "node scripts/check-api-surface.cjs",
     "generate": "npm run generate:contracts",
     "prebuild": "npm run generate:contracts",
-    "build": "tsup",
+    "build": "node init && tsup",
     "test": "jest",
     "test:integration": "bash scripts/run-integration.sh",
     "test:browser": "jest --config jest.browser.config.js",
     "assert:no-node-crypto": "node scripts/assert-no-node-crypto.mjs",
-    "prepublishOnly": "npm run lint && npm run typecheck && npm run check:api-surface && npm run build",
+    "prepublishOnly": "node ../scripts/assert-ci-publish.mjs && npm run lint && npm run typecheck && npm run build && npm run check:package",
     "check:layout": "node scripts/check-package-layout.mjs",
     "check:tree-shake": "node scripts/check-tree-shake.mjs",
     "check:size": "node scripts/check-package-size.mjs",
-    "check:package": "npm run check:layout && npm run check:tree-shake && npm run check:size",
-    "prepublishOnly": "node ../scripts/assert-ci-publish.mjs && npm run lint && npm run typecheck && npm run build && npm run check:package"
+    "check:package": "npm run check:layout && npm run check:tree-shake && npm run check:size"
   },
   "keywords": [
     "syncro",
